@@ -18,26 +18,39 @@ import server from '@adonisjs/core/services/server'
 server.errorHandler(() => import('#exceptions/handler'))
 
 /**
- * The server middleware stack runs middleware on all the HTTP
- * requests, even if there is no route registered for
- * the request URL.
+ * The server middleware stack runs middleware on all HTTP
+ * requests, even if no route is matched.
  */
 server.use([
+  // Middleware qui logue les erreurs avant toute chose
+  () => import('#middleware/error_logger'),
+
+  // Middleware qui injecte les bindings du container
   () => import('#middleware/container_bindings_middleware'),
+
+  // Force les réponses JSON
   () => import('#middleware/force_json_response_middleware'),
+
+  // Gestion du CORS
   () => import('@adonisjs/cors/cors_middleware'),
 ])
 
 /**
- * The router middleware stack runs middleware on all the HTTP
+ * The router middleware stack runs middleware on all HTTP
  * requests with a registered route.
  */
-router.use([() => import('@adonisjs/core/bodyparser_middleware'), () => import('@adonisjs/auth/initialize_auth_middleware')])
+router.use([
+  () => import('@adonisjs/core/bodyparser_middleware'),
+  () => import('@adonisjs/auth/initialize_auth_middleware'),
+
+  // Middleware qui logue les requêtes HTTP (durée, statut...)
+  () => import('#middleware/http_logger'),
+])
 
 /**
  * Named middleware collection must be explicitly assigned to
  * the routes or the routes group.
  */
 export const middleware = router.named({
-  auth: () => import('#middleware/auth_middleware')
+  auth: () => import('#middleware/auth_middleware'),
 })
