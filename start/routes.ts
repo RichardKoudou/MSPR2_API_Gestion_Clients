@@ -9,6 +9,8 @@
 
 import CustomerController from '#controllers/customerController';
 import router from '@adonisjs/core/services/router'
+
+
 //import { middleware } from './kernel.js';
 
 router.get('/', async () => {
