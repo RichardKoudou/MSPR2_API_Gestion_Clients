@@ -13,7 +13,17 @@ export default class CustomerController {
             last_name: storeCustomer.last_name,
             first_name : storeCustomer.first_name,
             email : storeCustomer.email,
+            phone : storeCustomer.phone,
+            company_name : storeCustomer.company_name,
+            siret : storeCustomer.siret,
+            role : storeCustomer.role,
+            address_line1 : storeCustomer.address_line1,
+            address_line2 : storeCustomer.address_line2,
+            postal_code : storeCustomer.postal_code,
+            city : storeCustomer.city,
+            country : storeCustomer.country,
             password : hashedPassword,
+
         })
 
         if (!response.ok){
