@@ -15,7 +15,7 @@ export default class extends BaseSchema {
       table.string('siret').notNullable()
       table.string('role').notNullable()
       table.string('address_line1').notNullable()
-      table.string('address_line2').notNullable()
+      table.string('address_line2').nullable()
       table.string('postal_code').notNullable()
       table.string('city').notNullable()
       table.string('country').notNullable()

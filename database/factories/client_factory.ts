@@ -11,6 +11,16 @@ export const ClientFactory = Factory
       last_name: faker.person.lastName(),
       email: faker.internet.email(),
       password: await hash.make(rawPassword),
+      phone: faker.phone.number(),
+      company_name: faker.company.name(),
+      siret: faker.string.numeric({ length: 9 }),
+      role: 'Particulier',
+      address_line1: faker.location.streetAddress(),
+      address_line2: faker.location.secondaryAddress(),
+      postal_code: faker.location.zipCode(),
+      city: faker.location.city(),
+      country: faker.location.country(),
+      
     }
   })
   .build()
