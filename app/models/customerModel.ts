@@ -26,10 +26,10 @@ export default class Customers extends BaseModel {
   declare role: string | null
 
   @column()
-  declare address_line1: string | null
+  declare address_line_1: string | null
 
   @column()
-  declare address_line2: string | null
+  declare address_line_2: string | null
 
   @column()
   declare postal_code: string | null
