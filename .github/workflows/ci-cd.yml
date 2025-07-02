@@ -3,9 +3,21 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [main]
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }} # ex: monpseudo/client-service:latest
+  NODE_ENV: test
+  PORT: 3333
+  APP_KEY: ${{ secrets.APP_KEY }}
+  HOST: 127.0.0.1
+  LOG_LEVEL: info
+  DB_HOST: 127.0.0.1
+  DB_PORT: 5432
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
 
 jobs:
   build-test-push:
@@ -21,11 +33,16 @@ jobs:
       - name: Run tests inside Docker container
         run: |
           docker run --rm \
-            -e NODE_ENV=test \
-            -e PORT=${{ secrets.TEST_PORT }} \
-            -e APP_KEY=${{ secrets.TEST_APP_KEY }} \
-            -e HOST=${{ secrets.TEST_HOST }} \
-            -e LOG_LEVEL=${{ secrets.TEST_LOG_LEVEL }} \
+            -e NODE_ENV=$NODE_ENV \
+            -e PORT=$PORT \
+            -e APP_KEY=$APP_KEY \
+            -e HOST=$HOST \
+            -e LOG_LEVEL=$LOG_LEVEL \
+            -e DB_HOST=$DB_HOST \
+            -e DB_PORT=$DB_PORT \
+            -e DB_USER=$DB_USER \
+            -e DB_PASSWORD=$DB_PASSWORD \
+            -e DB_DATABASE=$DB_DATABASE \
             $IMAGE_NAME npm test
 
       - name: Log in to Docker Hub
