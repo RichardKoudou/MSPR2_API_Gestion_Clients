@@ -16,7 +16,7 @@ jobs:
       APP_KEY: ${{ secrets.APP_KEY }}
       HOST: ${{ secrets.HOST }}
       LOG_LEVEL: info
-      DB_HOST: postgres
+      DB_HOST: localhost  # Changez 'postgres' en 'localhost'
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
