@@ -1,9 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
-
+import hash from '@adonisjs/core/services/hash'
 
 export default class Customers extends BaseModel {
+  static async verifyCredentials(email: string, password: string) {
+    const customer = await this.findByOrFail('email', email)
+    const verified = await hash.verify(customer.password, password)
+    if (!verified) {
+      throw new Error('Invalid credentials')
+    }
+    return customer
+  }
+
   @column({ isPrimary: true })
   declare id: number
 
