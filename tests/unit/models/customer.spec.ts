@@ -48,7 +48,7 @@ test.group('Customer Model', (group) => {
       city: 'Paris',
       country: 'France'
     }
-    const customer = await Customers.create(customerData)
+    await Customers.create(customerData)
     
     const verified = await Customers.verifyCredentials(
       customerData.email,
