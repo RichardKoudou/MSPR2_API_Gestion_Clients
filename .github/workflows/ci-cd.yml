@@ -4,24 +4,25 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [main]
-
-env:
-  NODE_ENV: test
-  PORT: ${{ secrets.PORT }}
-  APP_KEY: ${{ secrets.APP_KEY }}
-  HOST: ${{ secrets.HOST }}
-  LOG_LEVEL: info
-  DB_HOST: ${{ secrets.DB_HOST }}
-  DB_PORT: ${{ secrets.DB_PORT }}
-  DB_USER: ${{ secrets.DB_USER }}
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-  DB_DATABASE: ${{ secrets.DB_DATABASE }}
-  IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+    branches: [ main ]
 
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
+
+    env:  
+      NODE_ENV: test
+      PORT: ${{ secrets.PORT }}
+      APP_KEY: ${{ secrets.APP_KEY }}
+      HOST: ${{ secrets.HOST }}
+      LOG_LEVEL: info
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+
     services:
       postgres:
         image: postgres:15
@@ -45,17 +46,6 @@ jobs:
         run: docker build -t $IMAGE_NAME .
 
       - name: Run tests inside Docker container
-        env:
-          NODE_ENV: ${{ env.NODE_ENV }}
-          PORT: ${{ env.PORT }}
-          APP_KEY: ${{ env.APP_KEY }}
-          HOST: ${{ env.HOST }}
-          LOG_LEVEL: ${{ env.LOG_LEVEL }}
-          DB_HOST: ${{ env.DB_HOST }}
-          DB_PORT: ${{ env.DB_PORT }}
-          DB_USER: ${{ env.DB_USER }}
-          DB_PASSWORD: ${{ env.DB_PASSWORD }}
-          DB_DATABASE: ${{ env.DB_DATABASE }}
         run: |
           docker run --rm \
             -e NODE_ENV=$NODE_ENV \
