@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  NODE_ENV: test
+  NODE_ENV: development
   PORT: 3333
   APP_KEY: ${{ secrets.APP_KEY }}
   HOST: 127.0.0.1
