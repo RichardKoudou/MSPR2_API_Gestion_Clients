@@ -21,12 +21,12 @@ export const customerValidator = vine.compile(
 )
 export const updateCustomerValidator = vine.compile(
     vine.object({
-    phone: vine.string().trim().minLength(8),
+    /*phone: vine.string().trim().minLength(8),
     company_name : vine.string().trim().minLength(1),
     address_line_1: vine.string().minLength(5),
     postal_code: vine.string().minLength(5),
     city: vine.string().minLength(3),
-    country: vine.string().minLength(3),
+    country: vine.string().minLength(3),*/
     password: vine.string()
       .minLength(8)
       .trim()
