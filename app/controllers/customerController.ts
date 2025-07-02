@@ -76,6 +76,6 @@ export default class CustomerController {
         if (!response.ok){
             return response.status(400).json({message: 'Error while fetching customers'})
         }
-        return response.status(200).json(customers)
+        return response.status(200).json({ data: customers })
     };
 }
