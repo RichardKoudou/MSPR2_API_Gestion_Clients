@@ -1,3 +1,4 @@
+
 name: CI/CD Pipeline
 
 on:
@@ -11,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
-    # Variables d'environnement globales accessibles à toutes les étapes + au service PostgreSQL
     env:
       NODE_ENV: test
       PORT: ${{ secrets.PORT }}
@@ -31,14 +31,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: $DB_DATABASE
-          POSTGRES_USER: $DB_USER
-          POSTGRES_PASSWORD: $DB_PASSWORD
-        options: >-
-          --health-cmd "pg_isready -U $DB_USER"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          POSTGRES_DB: ${{ env.DB_DATABASE }}
+          POSTGRES_USER: ${{ env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -55,7 +50,7 @@ jobs:
 
       - name: Wait for PostgreSQL to be ready
         run: |
-          until pg_isready -h localhost -p 5432 -U $DB_USER; do
+          until pg_isready -h localhost -p 5432 -U ${{ env.DB_USER }}; do
             echo "Waiting for PostgreSQL..."
             sleep 2
           done
