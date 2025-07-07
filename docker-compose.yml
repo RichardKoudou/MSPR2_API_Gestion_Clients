@@ -1,21 +1,18 @@
 version: '3.8'
 
 services:
-  #  service AdonisJS (client-service)
   client-service:
     build: .
     container_name: client-service
     ports:
       - "3333:3333"
-    environment:
-      - NODE_ENV=production
-      - KAFKA_BROKERS=kafka:9092
+    env_file:
+      - .env
     networks:
       - appnet
     depends_on:
       - kafka
 
-  # Kafka & Zookeeper
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -43,7 +40,6 @@ services:
     networks:
       - appnet
 
-  # Prometheus
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -58,7 +54,6 @@ services:
     depends_on:
       - client-service
 
-  # Grafana
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
