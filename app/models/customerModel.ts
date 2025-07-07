@@ -26,13 +26,13 @@ export default class Customers extends BaseModel {
   declare phone: string | null
 
   @column()
-  declare company_name: string | null
-
-  @column()
-  declare siret: string | null
-
-  @column()
   declare role: string | null
+
+  @column()
+  declare postal_code: string | null
+
+  @column()
+  declare company_name: string | null
 
   @column()
   declare address_line_1: string | null
@@ -41,7 +41,7 @@ export default class Customers extends BaseModel {
   declare address_line_2: string | null
 
   @column()
-  declare postal_code: string | null
+  declare siret: string | null
 
   @column()
   declare city: string | null
@@ -65,4 +65,31 @@ export default class Customers extends BaseModel {
   declare updatedAt: DateTime
 
   static accessTokens = DbAccessTokensProvider.forModel(Customers)
+
+  serialize() {
+    const base = super.serialize()
+
+    return {
+      id: this.id,
+      email: this.email,
+      last_name: this.last_name,
+      first_name: this.first_name,
+      phone: this.phone,
+      role: this.role,
+      address: {
+        line1: this.address_line_1,
+        line2: this.address_line_2,
+        postal_code: this.postal_code,
+        city: this.city,
+        country: this.country,
+      },
+      company: {
+        name: this.company_name,
+        siret: this.siret,
+      },
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      orders: (this as any).orders ?? [], // orders est injecté depuis le service orders (API externe)
+    }
+  }
 }

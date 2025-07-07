@@ -19,8 +19,8 @@ export default class extends BaseSchema {
       table.string('postal_code').notNullable()
       table.string('city').notNullable()
       table.string('country').notNullable()
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
     })
   }
 
