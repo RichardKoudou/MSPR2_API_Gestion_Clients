@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 export function setupAxiosMock(): { api: AxiosInstance; mock: MockAdapter } {
   // Crée l'instance Axios à utiliser dans l'app
   const api: AxiosInstance = axios.create({
-    baseURL: 'https://payetonkawa/api/v1', // à modifier après dev de l'api orders
+    baseURL: '/', // à modifier après dev de l'api orders
     timeout: 1000,
     headers: { 'Content-Type': 'application/json' },
   })
