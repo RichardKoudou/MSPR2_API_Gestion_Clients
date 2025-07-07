@@ -12,6 +12,22 @@ services:
       - appnet
     depends_on:
       - kafka
+      - postgres
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - appnet
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -68,6 +84,7 @@ services:
 
 volumes:
   grafana-storage:
+  postgres-data:
 
 networks:
   appnet:
