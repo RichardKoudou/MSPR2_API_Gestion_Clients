@@ -6,6 +6,9 @@ import { CustormerService } from '#services/custormer_service'
 import { setupAxiosMock } from '#tests/helpers/axios-mock'
 
 test.group('Customer API', (group) => {
+  group.teardown(async () => {
+    await Database.manager.closeAll()
+  })
   group.each.setup(async () => {
     await Database.beginGlobalTransaction()
     await Database.from('customers').delete()

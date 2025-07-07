@@ -60,7 +60,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npm test || true
+          npm test --exit
           echo "Tests finished"
 
       - name: Login to Docker Hub
