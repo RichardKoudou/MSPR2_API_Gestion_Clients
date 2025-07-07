@@ -38,7 +38,7 @@ test.group('Customer API', (group) => {
       password: 'NewPassword123!'
     })
 
-    response.assertStatus(200)
+    response.assertStatus(201)
   })
 
   test('peut supprimer un client', async ({ client }) => {
