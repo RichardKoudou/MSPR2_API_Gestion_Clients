@@ -1,11 +1,17 @@
 import Customers from "#models/customerModel"
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
 export class CustormerService {
+
+  static httpClient: AxiosInstance = axios
+
+  static setHttpClient(client: AxiosInstance) {
+    this.httpClient = client
+  }
   static async loadExternalRelations(customer: Customers) {
     try {
       // Récupère toutes les commandes du customer (avec leurs produits déjà inclus)
-      const { data: orders } = await axios.get(`https://payetonkawa/api/v1/orders?customerId=${customer.id}`)
+      const { data: orders } = await this.httpClient.get(`/api/v1/orders?customerId=${customer.id}`)
 
       // Retourne un objet enrichi dynamiquement
       return {

@@ -2,18 +2,15 @@ import axios, { AxiosInstance } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 export function setupAxiosMock(): { api: AxiosInstance; mock: MockAdapter } {
-  // Crée l'instance Axios à utiliser dans l'app
   const api: AxiosInstance = axios.create({
-    baseURL: '/', // à modifier après dev de l'api orders
+    baseURL: 'https://payetonkawa',
     timeout: 1000,
     headers: { 'Content-Type': 'application/json' },
   })
 
-  
   const mock = new MockAdapter(api as any)
 
-  // Mock pour la route GET /api/v1/orders?customerId=...
-  mock.onGet(/orders\?customerId=\d+/).reply((config) => {
+  mock.onGet(/\/api\/v1\/orders\?customerId=\d+/).reply((config) => {
     const customerId = config.url?.match(/customerId=(\d+)/)?.[1]
 
     return [

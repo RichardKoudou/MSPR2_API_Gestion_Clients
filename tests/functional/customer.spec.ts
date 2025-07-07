@@ -2,11 +2,18 @@ import { test } from '@japa/runner'
 import Database from '@adonisjs/lucid/services/db'
 import { ClientFactory } from '#database/factories/client_factory'
 import assert from 'assert'
+import { CustormerService } from '#services/custormer_service'
+import { setupAxiosMock } from '#tests/helpers/axios-mock'
 
 test.group('Customer API', (group) => {
   group.each.setup(async () => {
     await Database.beginGlobalTransaction()
     await Database.from('customers').delete()
+
+    // Setup le mock ici
+    const { api } = setupAxiosMock()
+    CustormerService.setHttpClient(api)
+    
     return () => Database.rollbackGlobalTransaction()
   })
 
