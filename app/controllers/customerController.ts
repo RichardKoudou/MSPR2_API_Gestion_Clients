@@ -75,7 +75,7 @@ export default class CustomerController {
         if(!response.ok){
             return response.status(400).json({message: 'User does not exist'})
         } else {
-            return response.status(200).json(customer)
+            return response.status(201).json(customer)
         }
     };
 

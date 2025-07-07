@@ -1,0 +1,11 @@
+[2025-06-19 19:48:14] INFO - HTTP POST /payetonkawa/api/v1/storeCustomer {"status":422,"duration":"7.22ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 19:50:04] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"659.18ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:37:59] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"70.68ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:38:03] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"135.60ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:38:06] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"144.59ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:38:10] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"100.15ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:38:13] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"98.94ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:38:36] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/201 {"status":422,"duration":"10.54ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:40:13] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/201 {"status":422,"duration":"675.45ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:40:58] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/201 {"status":200,"duration":"817.85ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
+[2025-06-19 20:41:50] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/201 {"status":201,"duration":"659.40ms","ip":"::1","userAgent":"PostmanRuntime/7.43.4"}
