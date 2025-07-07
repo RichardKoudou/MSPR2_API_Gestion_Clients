@@ -8,6 +8,7 @@
 */
 
 import CustomerController from '#controllers/customerController';
+import { register } from '#services/prometheus_service';
 import router from '@adonisjs/core/services/router'
 
 
@@ -26,3 +27,8 @@ router.group(() => {
   router.patch('updateCustomer/:id', [CustomerController, 'update']);
   router.delete('deleteCustomer/:id', [CustomerController, 'destroy']);
 }).prefix('payetonkawa/api/v1/')
+
+router.get('/metrics', async ({ response }) => {
+  response.header('Content-Type', register.contentType)
+  return register.metrics()
+})

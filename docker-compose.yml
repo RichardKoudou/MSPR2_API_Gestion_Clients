@@ -1,33 +1,79 @@
 version: '3.8'
 
 services:
+  #  service AdonisJS (client-service)
   client-service:
     build: .
+    container_name: client-service
     ports:
       - "3333:3333"
     environment:
       - NODE_ENV=production
       - KAFKA_BROKERS=kafka:9092
+    networks:
+      - appnet
     depends_on:
       - kafka
 
+  # Kafka & Zookeeper
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "2181:2181"
+    networks:
+      - appnet
 
   kafka:
     image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
+    container_name: kafka
     ports:
       - "9092:9092"
+    depends_on:
+      - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    networks:
+      - appnet
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - appnet
+    depends_on:
+      - client-service
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - appnet
+    depends_on:
+      - prometheus
+
+volumes:
+  grafana-storage:
+
+networks:
+  appnet:
+    driver: bridge
