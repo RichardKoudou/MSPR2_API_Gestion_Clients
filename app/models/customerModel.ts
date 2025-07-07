@@ -67,7 +67,6 @@ export default class Customers extends BaseModel {
   static accessTokens = DbAccessTokensProvider.forModel(Customers)
 
   serialize() {
-    const base = super.serialize()
 
     return {
       id: this.id,
