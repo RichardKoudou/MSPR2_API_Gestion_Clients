@@ -68,7 +68,7 @@ jobs:
       - name: Run tests
         id: tests
         run: |
-          if npm test --exit; then
+          if npm test --force-exit; then
             echo "status=success" >> $GITHUB_OUTPUT
             exit 0
           else
