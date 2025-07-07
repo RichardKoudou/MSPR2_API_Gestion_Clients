@@ -95,8 +95,8 @@ jobs:
     env:
       IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
     steps:
-      - name: Debug test status
-        run: echo "Received test status: ${{ needs.test.outputs.test_status }}"
+      - run: echo "${{ needs.test.outputs.test_status }}"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
