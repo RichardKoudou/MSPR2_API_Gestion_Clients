@@ -75,7 +75,8 @@ jobs:
 
       - name: Check test status
         run: |
-          if [[ "${{ steps.tests.outputs.status }}" != "0" ]]; then
+          if [[ "${{ steps.tests.outputs.status }}" != "success" ]]; then
+
             echo "Tests failed"
             exit 1
           fi
