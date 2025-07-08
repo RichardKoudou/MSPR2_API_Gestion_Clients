@@ -3,8 +3,7 @@ import { HttpContext } from "@adonisjs/core/http";
 import Customers from "#models/customerModel";
 import hash from "@adonisjs/core/services/hash";
 import { CustormerService } from "#services/custormer_service";
-//import {api} from "#helpers/axios-mock";
-//import { report } from "process";
+
 
 export default class CustomerController {
 
@@ -57,13 +56,7 @@ export default class CustomerController {
         } catch {
             return response.status(404).json({message : 'Customer does not exist'})
         }
-        /*const customer = await Customers.findByOrFail('id', id)
-
-        if (!response.ok){
-            return response.status(400).json({message: 'User does not exist'})
-        } else {
-            return response.status(200).json(customer)
-        }*/
+        
     };
 
     async update({request, response} : HttpContext){
