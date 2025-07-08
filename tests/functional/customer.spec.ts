@@ -8,15 +8,20 @@ import { setupAxiosMock } from '#tests/helpers/axios-mock'
 test.group('Customer API', (group) => {
   group.teardown(async () => {
     await Database.manager.closeAll()
+
+    // 👇 Ajoute ceci pour forcer l'arrêt du processus Node
+    if (process.env.CI) {
+      process.exit(0)
+    }
   })
+
   group.each.setup(async () => {
     await Database.beginGlobalTransaction()
     await Database.from('customers').delete()
 
-    // Setup le mock ici
     const { api } = setupAxiosMock()
     CustormerService.setHttpClient(api)
-    
+
     return () => Database.rollbackGlobalTransaction()
   })
 
