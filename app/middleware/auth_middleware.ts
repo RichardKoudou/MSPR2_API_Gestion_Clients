@@ -19,7 +19,18 @@ export default class AuthMiddleware {
       guards?: (keyof Authenticators)[]
     } = {}
   ) {
-    await ctx.auth.authenticateUsing(options.guards, { loginRoute: this.redirectTo })
-    return next()
+
+    try {
+
+      await ctx.auth.authenticateUsing(options.guards)
+      return next()
+      
+    } catch (error) {
+      // Retourne une erreur 401 en cas d'échec d'authentification
+      return ctx.response.status(401).json({
+        error: 'Non authentifié',
+        message: 'Vous devez être connecté pour accéder à cette ressource'
+      })
+    }
   }
 }

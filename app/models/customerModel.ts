@@ -64,7 +64,13 @@ export default class Customers extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  static accessTokens = DbAccessTokensProvider.forModel(Customers)
+  static accessTokens = DbAccessTokensProvider.forModel(Customers, {
+    expiresIn: '1 hour',
+    prefix: 'oat_',
+    table: 'auth_access_tokens',
+    type: 'auth_token',
+    tokenSecretLength: 40,
+  })
 
   serialize() {
 

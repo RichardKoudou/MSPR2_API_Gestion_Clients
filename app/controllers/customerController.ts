@@ -1,4 +1,4 @@
-import { customerValidator, updateCustomerValidator } from "#validators/customerValidator";
+import { customerValidator, loginValidator, updateCustomerValidator } from "#validators/customerValidator";
 import { HttpContext } from "@adonisjs/core/http";
 import Customers from "#models/customerModel";
 import hash from "@adonisjs/core/services/hash";
@@ -6,6 +6,54 @@ import { CustormerService } from "#services/custormer_service";
 
 
 export default class CustomerController {
+
+
+    async login({ request, response, auth }: HttpContext) {
+        const { email, password } = await request.validateUsing(loginValidator)
+        
+        try {
+            const customer = await Customers.verifyCredentials(email, password)
+            const token = await auth.use('api').createToken(customer)
+
+            
+            return response.ok({
+                token: token,
+                type: 'bearer',
+                expires_at: token.expiresAt
+        })
+        } catch (error) {
+            return response.unauthorized({
+                error: 'Identifiants invalides',
+                message: 'Email ou mot de passe incorrect'
+        })
+        }
+    }
+
+    async logout({ request, response, auth }: HttpContext) {
+        const { id } = request.params()
+        const authenticatedUser = auth.user
+
+        try {
+            const customer = await Customers.findByOrFail('id', id)
+
+            if (!authenticatedUser || authenticatedUser.id !== customer.id) {
+                return response.forbidden({
+                    error: 'Accès refusé',
+                    message: 'Vous ne pouvez pas déconnecter un autre utilisateur'
+                })
+            }
+
+            await auth.use('api').invalidateToken()
+            return response.ok({
+                message: 'Déconnexion réussie'
+            })
+        } catch (error) {
+            return response.notFound({
+                error: 'Utilisateur non trouvé',
+                message: 'L\'utilisateur n\'existe pas'
+            })
+        }
+    }
 
     async store({ request, response }: HttpContext) {
         const storeCustomer = await request.validateUsing(customerValidator)
@@ -44,53 +92,91 @@ export default class CustomerController {
         }
     };
 
-    async show({request, response} : HttpContext){
+    async show({request, response, auth} : HttpContext){
         const {id} = request.params()
+        const authenticatedUser = auth.user
 
         try {
             const customer = await Customers.findByOrFail('id', id)
+
+            if (!authenticatedUser || authenticatedUser.id !== customer.id) {
+
+                return response.forbidden({
+                    error: 'Accès refusé',
+                    message: 'Vous ne pouvez pas accéder aux données d\'un autre utilisateur'
+                })
+            }
             const enrichedCustomer = await CustormerService.loadExternalRelations(customer)
 
             return response.ok(enrichedCustomer)
 
         } catch {
-            return response.status(404).json({message : 'Customer does not exist'})
+            return response.status(404).json({message : 'L\'utilisateur n\'existe pas'})
         }
         
     };
 
-    async update({request, response} : HttpContext){
+    async update({request, response, auth} : HttpContext){
         const {id} = request.params()
-        const customer = await Customers.findByOrFail('id', id)
-        const updateCustomer = await request.validateUsing(updateCustomerValidator)
-        customer.password = await hash.make(updateCustomer.password)
-        await customer.save()
+        const authenticatedUser = auth.user
 
-        if(!response.ok){
-            return response.status(400).json({message: 'User does not exist'})
-        } else {
+        try {
+            const customer = await Customers.findByOrFail('id', id)
+
+            if (!authenticatedUser || authenticatedUser.id !== customer.id) {
+
+                return response.forbidden({
+                    error: 'Accès refusé',
+                    message: 'Vous ne pouvez pas modifier les données d\'un autre utilisateur'
+                })
+            }
+
+            const updateCustomer = await request.validateUsing(updateCustomerValidator)
+            customer.password = await hash.make(updateCustomer.password)
+            await customer.save()
+
             return response.status(201).json(customer)
+
+        } catch {
+            return response.status(404).json({ message: 'L\'utilisateur n\'existe pas' })
         }
     };
 
-    async destroy({request, response} : HttpContext){
+    async destroy({request, response, auth} : HttpContext){
         const {id} = request.params()
-        const deleteCustomer = await Customers.findByOrFail('id', id)
-        await deleteCustomer.delete()
+        const authenticatedUser = auth.user
 
-        if (!response.ok){
-            return response.status(400).json({message: 'User does not exist'})
-        } else {
-            return response.status(204).json({message : 'Customer deleted'})
+        try{
+            const deleteCustomer = await Customers.findByOrFail('id', id)
+
+            if (!authenticatedUser || authenticatedUser.id !== deleteCustomer.id) {
+                return response.forbidden({
+                    error: 'Accès refusé',
+                    message: 'Vous ne pouvez pas supprimer le compte d\'un autre utilisateur'
+                })
+            }
+            await deleteCustomer.delete()
+            return response.status(204).json({ message: 'Votre compte a été supprimé avec succès !' })
+
+        } catch {
+            return response.status(404).json({ message: 'Ce compte n\'existe pas' })
         }
-    };
+    }
 
-    async index({response} : HttpContext){
+    async index({response, auth} : HttpContext){
+
+        const authenticatedUser = auth.user
+
+        if (!authenticatedUser || authenticatedUser.role !== 'admin') {
+
+            return response.forbidden({
+            error: 'Accès refusé',
+            message: 'Seuls les administrateurs peuvent accéder à la liste des utilisateurs'
+            })
+        }
         const customers = await Customers.all()
 
-        if (!response.ok){
-            return response.status(400).json({message: 'Error while fetching customers'})
-        }
         return response.status(200).json({ data: customers })
+
     };
 }
