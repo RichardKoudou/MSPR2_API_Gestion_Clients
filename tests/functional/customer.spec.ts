@@ -9,7 +9,7 @@ test.group('Customer API', (group) => {
   group.teardown(async () => {
     await Database.manager.closeAll()
 
-    // 👇 Ajoute ceci pour forcer l'arrêt du processus Node
+    // Pour forcer l'arrêt du processus Node
     if (process.env.CI) {
       process.exit(0)
     }
