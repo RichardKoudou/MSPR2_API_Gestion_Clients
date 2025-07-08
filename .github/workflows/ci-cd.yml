@@ -68,8 +68,8 @@ jobs:
       - name: Run tests
         id: tests
         run: |
-          npx --no-install node ace test --exit || exit 1
-        timeout-minutes: 5
+          npx --no-install node ace test
+        timeout-minutes: 2
 
       - name: Check test status
         if: always()
