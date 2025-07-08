@@ -13,3 +13,11 @@
 [2025-07-07 22:33:10] INFO - HTTP GET /payetonkawa/api/v1/customer/315 {"status":200,"duration":"5.89ms","ip":"127.0.0.1"}
 [2025-07-07 22:33:11] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/316 {"status":201,"duration":"100.09ms","ip":"127.0.0.1"}
 [2025-07-07 22:33:11] INFO - HTTP DELETE /payetonkawa/api/v1/deleteCustomer/317 {"status":204,"duration":"2.46ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:34] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"3.70ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:35] INFO - HTTP GET /payetonkawa/api/v1/customer/323 {"status":200,"duration":"6.05ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:35] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/324 {"status":201,"duration":"83.49ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:35] INFO - HTTP DELETE /payetonkawa/api/v1/deleteCustomer/325 {"status":204,"duration":"3.40ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:56] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"3.64ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:56] INFO - HTTP GET /payetonkawa/api/v1/customer/331 {"status":200,"duration":"5.64ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:56] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/332 {"status":201,"duration":"107.94ms","ip":"127.0.0.1"}
+[2025-07-08 06:21:56] INFO - HTTP DELETE /payetonkawa/api/v1/deleteCustomer/333 {"status":204,"duration":"3.08ms","ip":"127.0.0.1"}
