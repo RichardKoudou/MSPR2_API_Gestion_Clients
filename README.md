@@ -17,9 +17,10 @@ Ce service gère l'authentification et les opérations CRUD pour les clients de 
 - **Admin** : Accès à toutes les fonctionnalités avec code d'authentification spécial
 
 ## Configuration Requise
-- Node.js
-- PostgreSQL
-- Docker (optionnel)
+- Node.js (v18 ou supérieur)
+- PostgreSQL (v14 ou supérieur)
+- Docker et Docker Compose (pour le déploiement conteneurisé)
+- Kafka (pour la communication inter-services)
 
 ## Installation
 
@@ -35,7 +36,7 @@ npm install
 
 3. Configurer les variables d'environnement
 ```bash
-cp .env.example .env
+cp .env.example .env .env.test
 # Modifier les variables dans .env selon votre environnement
 ```
 
@@ -74,23 +75,29 @@ node server.js
   - Nécessite un code administrateur valide
 
 ## Sécurité
-- Authentification par token JWT
-- Validation des données entrantes
-- Protection CORS
-- Vérification des rôles
-- Double authentification pour les actions administrateur
+- Authentification par token JWT avec expiration
+- Validation stricte des données entrantes avec Vine
+- Protection CORS configurée
+- Vérification des rôles et permissions
+- Double authentification pour les administrateurs (token + matricule)
+- Hachage des mots de passe avec Argon2
+- Rate limiting sur les routes sensibles
+- Logs de sécurité pour les tentatives d'accès non autorisées
 
 ## Monitoring
 - Logs d'API
 - Logs d'erreurs
 - Métriques Prometheus
+- Dashboard Grafana pour la visualisation
 
 ## Tests
 ```bash
+# Exécuter tous les tests
 npm test
 ```
 
 ## Docker
+### Services de base
 ```bash
 docker-compose up -d
 ```

@@ -136,3 +136,7 @@
 [2025-07-10 14:28:07] INFO - HTTP POST /payetonkawa/api/v1/customer/313/logout {"status":404,"duration":"14.08ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-10 14:28:17] INFO - HTTP POST /payetonkawa/api/v1/customer/318/logout {"status":403,"duration":"14.41ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-10 14:28:21] INFO - HTTP POST /payetonkawa/api/v1/customer/320/logout {"status":200,"duration":"19.02ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:45:15] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":201,"duration":"234.76ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:45:26] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"88.46ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:45:39] INFO - HTTP GET /payetonkawa/api/v1/customer/320 {"status":403,"duration":"25.39ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:45:44] INFO - HTTP GET /payetonkawa/api/v1/customer/321 {"status":200,"duration":"28.45ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
