@@ -1,98 +1,97 @@
-# Service de Gestion des Clients - PayeTonKawa
+# Service de Gestion des Clients
 
-## À propos
-
-Ce service fait partie de l'architecture microservices de PayeTonKawa, une plateforme de vente de café en ligne. Il est responsable de la gestion des clients, incluant l'inscription, la mise à jour des informations personnelles et la suppression des comptes.
+Ce service gère l'authentification et les opérations CRUD pour les clients de l'application.
 
 ## Fonctionnalités
 
-- Création de nouveaux comptes clients
-- Consultation des informations clients
-- Mise à jour des données clients
-- Suppression de comptes clients
-- Communication événementielle via Kafka
+### Gestion des Utilisateurs
+- Création de compte (Particulier ou Professionnel)
+- Authentification sécurisée
+- Modification des informations personnelles
+- Suppression de compte
+- Déconnexion sécurisée
 
-## Technologies Utilisées
+### Rôles Utilisateurs
+- **Particulier** : Accès aux fonctionnalités de base
+- **Professionnel** : Accès aux fonctionnalités de base avec informations entreprise (SIRET)
+- **Admin** : Accès à toutes les fonctionnalités avec code d'authentification spécial
 
-- Node.js 20
-- AdonisJS 6
+## Configuration Requise
+- Node.js
 - PostgreSQL
-- Kafka pour la communication événementielle
-- Docker et Docker Compose pour la conteneurisation
-
-## Prérequis
-
-- Docker et Docker Compose installés sur votre machine
-- Node.js 20 ou supérieur (pour le développement local)
-- npm (gestionnaire de paquets Node.js)
+- Docker (optionnel)
 
 ## Installation
 
-### Avec Docker (Recommandé)
-
-1. Clonez le repository :
+1. Cloner le repository
 ```bash
 git clone [url-du-repo]
-cd mspr2_client_service
 ```
 
-2. Lancez les conteneurs avec Docker Compose :
-```bash
-docker-compose up -d
-```
-
-L'application sera accessible sur `http://localhost:3333`
-
-### Installation Locale (Développement)
-
-1. Installez les dépendances :
+2. Installer les dépendances
 ```bash
 npm install
 ```
 
-2. Configurez les variables d'environnement :
-- Copiez le fichier `.env.example` en `.env`
-- Ajustez les variables selon votre environnement
-
-3. Lancez l'application en mode développement :
+3. Configurer les variables d'environnement
 ```bash
-npm run dev
+cp .env.example .env
+# Modifier les variables dans .env selon votre environnement
 ```
 
-## API Endpoints
+4. Lancer les migrations
+```bash
+node ace migration:run
+```
 
-Base URL : `/payetonkawa/api/v1`
+## Démarrage
 
-### Clients
+### Développement
+```bash
+node ace serve --watch
+```
 
-- `POST /storeCustomer` - Créer un nouveau client
-- `GET /customers` - Lister tous les clients
-- `GET /customer/:id` - Obtenir les détails d'un client
-- `PATCH /updateCustomer/:id` - Mettre à jour un client
-- `DELETE /deleteCustomer/:id` - Supprimer un client
+### Production
+```bash
+node server.js
+```
 
-## Architecture
+## Routes API
 
-Le service utilise une architecture en couches :
-- Controllers : Gestion des requêtes HTTP
-- Services : Logique métier
-- Models : Interaction avec la base de données
-- Validators : Validation des données entrantes
-- Events : Communication via Kafka
+### Authentification
+- POST `/login` : Connexion utilisateur
+- POST `/logout` : Déconnexion utilisateur (requiert authentification)
+
+### Gestion des Utilisateurs
+- POST `/customers` : Création d'un nouveau client
+- GET `/customers/:id` : Récupération des informations d'un client
+- PUT `/customers/:id` : Modification des informations d'un client
+- DELETE `/customers/:id` : Suppression d'un client
+
+### Administration
+- GET `/customers` : Liste tous les clients (réservé aux administrateurs)
+  - Requiert le rôle 'admin'
+  - Nécessite un code administrateur valide
+
+## Sécurité
+- Authentification par token JWT
+- Validation des données entrantes
+- Protection CORS
+- Vérification des rôles
+- Double authentification pour les actions administrateur
+
+## Monitoring
+- Logs d'API
+- Logs d'erreurs
+- Métriques Prometheus
 
 ## Tests
-
-Pour exécuter les tests :
 ```bash
-npm run test
+npm test
 ```
 
-## Scripts Disponibles
-
-- `npm run dev` : Lance le serveur en mode développement
-- `npm run build` : Compile le projet
-- `npm start` : Lance le serveur en production
-- `npm run lint` : Vérifie le style du code
-- `npm run format` : Formate le code
-- `npm run typecheck` : Vérifie les types TypeScript
+## Docker
+```bash
+docker-compose up -d
+```
 
