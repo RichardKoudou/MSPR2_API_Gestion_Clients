@@ -11,11 +11,8 @@ import CustomerController from '#controllers/customerController';
 import { register } from '#services/prometheus_service';
 import router from '@adonisjs/core/services/router';
 import { middleware } from './kernel.js';
-
-
-
-
-//import { middleware } from './kernel.js';
+import AutoSwagger from "adonis-autoswagger";
+import swagger from "#config/swagger";
 
 router.get('/', async () => {
   return {
@@ -44,3 +41,11 @@ router.get('/metrics', async ({ response }) => {
   response.header('Content-Type', register.contentType)
   return register.metrics()
 })
+
+router.get("/swagger", async () => {
+  return AutoSwagger.default.docs(router.toJSON(), swagger);
+});
+
+router.get("/docs", async () => {
+  return AutoSwagger.default.ui("/swagger", swagger);
+});

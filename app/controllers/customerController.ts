@@ -7,7 +7,6 @@ import { CustormerService } from "#services/custormer_service";
 
 export default class CustomerController {
 
-
     async login({ request, response, auth }: HttpContext) {
         const { email, password } = await request.validateUsing(loginValidator)
         

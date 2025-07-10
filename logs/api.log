@@ -123,3 +123,7 @@
 [2025-07-08 12:42:04] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":200,"duration":"63.07ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-08 12:42:30] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"79.66ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-08 12:42:44] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":403,"duration":"12.81ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 13:58:21] INFO - HTTP GET /docs {"status":200,"duration":"0.63ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+[2025-07-10 13:58:22] INFO - HTTP GET /swagger {"status":200,"duration":"301.50ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+[2025-07-10 14:05:17] INFO - HTTP GET /docs {"status":200,"duration":"0.26ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+[2025-07-10 14:05:18] INFO - HTTP GET /swagger {"status":200,"duration":"372.54ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
