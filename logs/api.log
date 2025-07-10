@@ -127,3 +127,12 @@
 [2025-07-10 13:58:22] INFO - HTTP GET /swagger {"status":200,"duration":"301.50ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
 [2025-07-10 14:05:17] INFO - HTTP GET /docs {"status":200,"duration":"0.26ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
 [2025-07-10 14:05:18] INFO - HTTP GET /swagger {"status":200,"duration":"372.54ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+[2025-07-10 14:26:35] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":500,"duration":"363.16ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:26:49] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":201,"duration":"86.92ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:26:58] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"83.65ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:27:34] INFO - HTTP GET /payetonkawa/api/v1/customer/320 {"status":200,"duration":"30.42ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:27:46] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/320 {"status":401,"duration":"4.90ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:27:53] INFO - HTTP PATCH /payetonkawa/api/v1/updateCustomer/320 {"status":201,"duration":"92.40ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:28:07] INFO - HTTP POST /payetonkawa/api/v1/customer/313/logout {"status":404,"duration":"14.08ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:28:17] INFO - HTTP POST /payetonkawa/api/v1/customer/318/logout {"status":403,"duration":"14.41ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-10 14:28:21] INFO - HTTP POST /payetonkawa/api/v1/customer/320/logout {"status":200,"duration":"19.02ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
