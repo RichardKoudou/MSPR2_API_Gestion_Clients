@@ -19,6 +19,7 @@ public/assets
 # Build tools specific
 npm-debug.log
 yarn-error.log
+*.log
 
 # Editors specific
 .fleet
@@ -29,3 +30,4 @@ yarn-error.log
 .DS_Store
 #grafana
 dashboard_grafana.json
+logs/api.log
