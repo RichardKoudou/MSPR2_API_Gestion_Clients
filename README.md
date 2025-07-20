@@ -57,7 +57,8 @@ node ace serve --watch
 node server.js
 ```
 ### variables d'environnement
-``` - TZ=UTC
+``` 
+    - TZ=UTC
     - PORT=3333
     - HOST=0.0.0.0
     - LOG_LEVEL=info
