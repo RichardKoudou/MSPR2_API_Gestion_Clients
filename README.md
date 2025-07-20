@@ -57,17 +57,18 @@ node ace serve --watch
 node server.js
 ```
 ### variables d'environnement
-TZ=UTC
-PORT=3333
-HOST=0.0.0.0
-LOG_LEVEL=info
-APP_KEY=
-NODE_ENV=development
-DB_HOST=
-DB_PORT=
-DB_USER=
-DB_PASSWORD=
-DB_DATABASE=
+``` - TZ=UTC
+    - PORT=3333
+    - HOST=0.0.0.0
+    - LOG_LEVEL=info
+    - APP_KEY=
+    - NODE_ENV=development
+    - DB_HOST=
+    - DB_PORT=
+    - DB_USER=
+    - DB_PASSWORD=
+    - DB_DATABASE=
+```
 
 ## Routes API
 
