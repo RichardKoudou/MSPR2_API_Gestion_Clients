@@ -140,3 +140,14 @@
 [2025-07-10 14:45:26] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"88.46ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-10 14:45:39] INFO - HTTP GET /payetonkawa/api/v1/customer/320 {"status":403,"duration":"25.39ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
 [2025-07-10 14:45:44] INFO - HTTP GET /payetonkawa/api/v1/customer/321 {"status":200,"duration":"28.45ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:21:22] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":500,"duration":"618.08ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:21:32] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":201,"duration":"111.02ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:21:45] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"111.33ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:21:57] INFO - HTTP GET /payetonkawa/api/v1/customers {"status":401,"duration":"10.91ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:22:06] INFO - HTTP GET /payetonkawa/api/v1/customer/321 {"status":401,"duration":"3.76ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:22:26] INFO - HTTP GET /payetonkawa/api/v1/customer/321 {"status":403,"duration":"21.27ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:22:40] INFO - HTTP GET /payetonkawa/api/v1/customer/323 {"status":200,"duration":"24.29ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:26:31] INFO - HTTP POST /payetonkawa/api/v1/auth/register {"status":201,"duration":"406.12ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 14:26:38] INFO - HTTP POST /payetonkawa/api/v1/auth/login {"status":200,"duration":"91.71ms","ip":"127.0.0.1","userAgent":"PostmanRuntime/7.44.1"}
+[2025-07-20 15:57:57] INFO - HTTP GET /docs {"status":200,"duration":"0.85ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+[2025-07-20 15:57:58] INFO - HTTP GET /swagger {"status":200,"duration":"595.24ms","ip":"127.0.0.1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
