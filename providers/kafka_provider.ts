@@ -1,34 +1,40 @@
-/*import type { ApplicationService } from '@adonisjs/core/types'
-import { KafkaService } from '#services/kafka_service'
+import type { ApplicationService } from '@adonisjs/core/types'
+import { KafkaService, KafkaConsumerService } from '#services/kafka_service'
 
 export default class KafkaProvider {
   constructor(protected app: ApplicationService) {}
 
   register() {
+    // Enregistrement du service Kafka pour la production
     this.app.container.singleton('kafka.service', () => {
       const kafkaService = new KafkaService()
       return kafkaService
     })
+
+    // Enregistrement du service Kafka pour la consommation
+    this.app.container.singleton('kafka.consumer.service', () => {
+      const kafkaConsumerService = new KafkaConsumerService()
+      return kafkaConsumerService
+    })
   }
 
   async boot() {
-    const kafkaService = this.app.container.resolve('kafka.service')
+    const kafkaService = await this.app.container.make('kafka.service')
+    const kafkaConsumerService = await this.app.container.make('kafka.consumer.service')
+
+    // Connexion des services Kafka
     await kafkaService.connect()
+    await kafkaConsumerService.connect()
 
-    // Subscribe to relevant topics for data synchronization
-    await kafkaService.subscribeToTopic('user.updates', async (message) => {
-      // Handle user updates
-      console.log('Received user update:', message)
-    })
-
-    await kafkaService.subscribeToTopic('product.updates', async (message) => {
-      // Handle product updates
-      console.log('Received product update:', message)
-    })
+    // Abonnement aux topics pertinents
+    await kafkaConsumerService.subscribeToTopics()
   }
 
   async shutdown() {
-    const kafkaService = this.app.container.resolve('kafka.service')
+    const kafkaService = await this.app.container.make('kafka.service')
+    const kafkaConsumerService = await this.app.container.make('kafka.consumer.service')
+
+    await kafkaConsumerService.disconnect()
     await kafkaService.disconnect()
   }
-}*/
+}
